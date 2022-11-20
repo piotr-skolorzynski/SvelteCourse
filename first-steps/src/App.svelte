@@ -1,6 +1,7 @@
 <script>
   import MeetupGrid from "./Meetups/MeetupGrid.svelte";
   import Header from "./UI/Header.svelte";
+  import TextInput from "./UI/TextInput.svelte";
 
   let meetups = [
     {
@@ -51,41 +52,30 @@
   main {
     margin-top: 5rem;
   }
+
+  form {
+    width: 30rem;
+    min-width: 90%;
+    margin: auto;
+  }
 </style>
 
 <Header />
 
 <main>
   <form on:submit|preventDefault={addMeetup}>
-    <div class="form-control">
-      <label for="title">Title</label>
-      <input type="text" id="title" bind:value={title}>
-    </div>
 
-    <div class="form-control">
-      <label for="subtitle">Subtitle</label>
-      <input type="text" id="subtitle" bind:value={subtitle}>
-    </div>
+    <TextInput id="title" label="Title" type="text" value={title} on:input={event => (title = event.target.value)} />
 
-    <div class="form-control">
-      <label for="address">Address</label>
-      <input type="text" id="address" bind:value={address}>
-    </div>
+    <TextInput id="subtitle" label="Subtitle" type="text" value={subtitle} on:input={event => (subtitle = event.target.value)} />
 
-    <div class="form-control">
-      <label for="imageUrl">Image URL</label>
-      <input type="text" id="timageUrl" bind:value={imageUrl}>
-    </div>
+    <TextInput id="address" label="Address" type="text" value={address} on:input={event => (address = event.target.value)} />
 
-    <div class="form-control">
-      <label for="email">E-Mail</label>
-      <input type="email" id="email" bind:value={email}>
-    </div>
+    <TextInput id="imageUrl" label="Image URL" type="text" value={imageUrl} on:input={event => (imageUrl = event.target.value)} />
 
-    <div class="form-control">
-      <label for="description">Description</label>
-      <textarea rows="3" id="description" bind:value={description}></textarea>
-    </div>
+    <TextInput id="email" label="E-Mail" type="email" value={email} on:input={event => (email = event.target.value)} />
+
+    <TextInput id="description" label="Description" controlType="textarea" value={description} on:input={event => (description = event.target.value)} />
 
     <button type="submit">Save</button>
   </form>
