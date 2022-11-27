@@ -41,7 +41,14 @@
 <Modal title="Edit Meetup Data" on:cancel>
   <form on:submit|preventDefault={submitForm}>
 
-    <TextInput id="title" label="Title" value={title} on:input={event => (title = event.target.value)} />
+    <TextInput 
+      id="title"
+      label="Title" 
+      valid={true} 
+      validityMessage="Please enter a valid title." 
+      value={title} 
+      on:input={event => (title = event.target.value)} 
+    />
 
     <TextInput id="subtitle" label="Subtitle" value={subtitle} on:input={event => (subtitle = event.target.value)} />
 
