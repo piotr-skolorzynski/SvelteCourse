@@ -17,6 +17,8 @@
   let descriptionValid = false;
   let imageUrl = '';
   let imageUrlValid = false;
+  let isFormValid = false;
+
   let isFavorite = false;
 
   $:titleValid = !isEmpty(title);
@@ -25,6 +27,7 @@
   $:emailValid = isEmailValid(email);
   $:descriptionValid = !isEmpty(description);
   $:imageUrlValid = !isEmpty(imageUrl);
+  $:isFormValid = titleValid && subtitleValid && addressValid && emailValid && descriptionValid && imageUrlValid;
 
   const dispatch = createEventDispatcher();
 
@@ -115,6 +118,6 @@
 
     <div slot="footer">
         <Button type="button" mode="outline" on:click={cancel}>Cancel</Button>
-        <Button type="button" on:click={submitForm}>Save</Button>
+        <Button type="button" on:click={submitForm} disabled={!isFormValid}>Save</Button>
     </div>
 </Modal>
