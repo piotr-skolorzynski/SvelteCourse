@@ -21,4 +21,30 @@ const meetups = writable([{
     isFavorite: false
 }]);
 
-export default meetups;
+const customMeetupsStore = {
+    subscribe: meetups.subscribe,
+    addMeetup: (meetupdata) => {
+        const newMeetup = {
+            ...meetupdata,
+            id: (Math.random() * 10000).toString(),
+            isFavorite: false
+        }
+
+        meetups.update(items => {
+            return [newMeetup, ...items]
+        })
+    },
+    toggleFavorite: (id) => {
+        return meetups.update(items => {
+            return items.map(item => {
+                if (item.id === id) {
+                    return { ...item, isFavorite: !item.isFavorite }
+                }
+
+                return item;
+            })
+        })
+    }
+}
+
+export default customMeetupsStore;
